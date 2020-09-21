@@ -1,0 +1,96 @@
+#importing libraries
+import time
+import random
+
+#Variables for rolling counter
+P = 0 #player wins
+C = 0 #comp wins
+D = 0 #draws
+
+#while loop variable
+a = 1 
+
+#setting up options for randomiser in the game
+RPS = ["rock", "paper", "scissors"]
+
+#start of script
+print("Hello, what's your name?")
+name = input()
+print("Nice to meet you " + name + ", are you ready to play rock, paper, scissors? I only like lowercase letters, capitals are too loud!")
+answer = input()
+if answer in ['n', 'N', 'Nope','nope','no','no!','No','NO!','No!','NO','na','Na','nah','Nah']:
+  print("Oh. Well, tough. I want to play")
+else:
+  print("Great, let's play!")
+
+#loop for multiple games
+while a > 0:
+  print( name + " wins = ", P)
+  print("Computer wins = ", C)
+  print( "Draws = ", D)
+  print("Ready?")
+
+  print("3...")
+  time.sleep(1)
+  print("2...")
+  time.sleep(1)
+  print("1...")
+  time.sleep(1)
+  print("Go!")
+
+  AIRand = random.choice(RPS) #computer's outcome
+  answer = input() #user choice
+
+  print('I choose', AIRand ) 
+
+  if answer == AIRand: #draw
+    print("Ooh, a draw! Another round?")
+    D = D+1 #draw counter increase
+    again2 = input()
+    if again2 in ['n', 'N', 'Nope','nope','no','no!','No','NO!','No!','NO','na','Na','nah','Nah']: 
+     print("Ok, have a nice day then. Bye!")
+     break
+    else:
+      print("Great! Let's go!")
+      continue
+  else: #win/lose
+    if answer in ["rock", "Rock"] and AIRand == "scissors":
+      print("You win! Play again?") 
+      P = P+1 #player win counter increase
+    elif answer in ["rock", "Rock"] and AIRand == "paper":
+      print("I win! Want to play again?") 
+      C = C+1 #computer win counter increase
+    elif answer in ["Scissors", "scissors"] and AIRand == "paper":
+      print("Nice! You win. Play again?") 
+      P = P+1 #player win counter increase
+    elif answer in ["Scissors", "scissors"] and AIRand == "rock":
+      print("Yay! I won! Want to play again?")
+      C = C+1 #computer win  counter increase
+    elif answer in ["paper", "Paper"] and AIRand == "rock":
+      print("You win! Well done, play again?")
+      P = P+1 #player win counter increase
+    else: #answer in ["paper", "Paper"] and AIRand == "scissors"
+      print("Yes, I win! Want another game?")
+      C = C+1 #computer win counter increase
+    again = input() #checking for 'play again' response
+
+  if again in ['n', 'N', 'Nope','nope','no','no!','No','NO!','No!','NO','na','Na','nah','Nah']: 
+    print("Ok, have a nice day then. Bye! \n") #while loop breaks
+    a=0
+    break
+  else:
+     print("Great! Let's go! \n")
+
+#final score tally
+print("Final Score:")
+print(name + " wins = ", P)
+print("Computer wins = ", C)
+print( "Draws = ", D)
+
+#Declaration of winner
+if P > C and P > D:
+  print(name + " won!")
+elif C > P and C > D:
+  print ("Computer (that's me) won!")
+else:
+  print("It's a draw!")
