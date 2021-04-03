@@ -1,0 +1,845 @@
+import time
+import random
+import math
+#--------------------------------------------------------------------
+# constants & variables
+g = 1;
+h = 1;
+i = 1;
+j = 1;
+k = 1;
+l = 1;
+m = 1;
+n = 1;
+p = 1;
+q = 1;
+r = 1;
+s = 1;
+t = 1;
+u = 1;
+v = 1;
+w = 1;
+y = 1;
+z = 1;
+a = 1;
+b = 1;
+c = 1;
+d = 1;
+e = 1;
+f = 1;
+
+#HP counter
+health = 0;
+
+#ability scores
+Str = 0;
+Dex = 0;
+Con = 0;
+Int = 0;
+Wis = 0;
+Cha = 0;
+
+#ability score modifiers
+Str_mod = 0;
+Dex_mod = 0;
+Con_mod = 0;
+Int_mod = 0;
+Wis_mod = 0;
+Cha_mod = 0;
+
+#arrays
+stats = [];
+skills = [];
+saving = [];
+armour = [];
+tools = [];
+weapons = [];
+special = [];
+languages = [];
+classfeatures = [];
+Standard = [15,14,13,12,10,8];
+Dice = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6];
+
+#skills arrays for class features
+
+#Cleric class skills
+CSkills = ["history", "insight", "medicine", "persuasion", "religion"];
+#Fighter class skills
+FSkills = ["acrobatics","animal handling","athletics", "history","insight","intimidation","perception","survival"];
+#Rogue class skills
+RSkills = ["acrobatics", "athletics", "deception","insight","intimidation","investigation", "perception", "persuasion", "sleight of hand", "stealth"];
+#Wizard class skills
+WSkills = ["arcana","history","insight","investigation","medicine","religion"];
+
+#class skill choices
+skill1 = [];
+skill2 = [];
+skill3 = [];
+skill4 = [];
+
+#Character information
+Name = "";
+Race = "";
+Class = "";
+Speed = "";
+Size = "";
+Darkvision = "None";
+
+#--------------------------------------------------------------------
+#start
+print("Making a DnD character has a few steps, but we can help! We'll cover 1st level character creation, including; \n - Race \n - Class \n - Stats");
+
+#-----------------------------
+#INTRODUCTION
+print("Do you want some additional information on DnD 5e character creation info used within this help guide? (y/n)");
+info = input();
+if info == "y":
+  print("This programme will help you choose and collate inforamtion for making a level 1 character for DnD 5e. It covers choosing races, classes, and ability scores (your choice of standard array or rolled).\n\n Standard array is [15,14,13,12,10,8]. \n Rolled stats are created from a random selection of the possible combinations of 4 sets of dice faces (akin to rolling 4d6 and removing the lowest). If the sum of these ability scores is 70 or lower, they are rerolled. \n \n  By the end, you will have a list of your character's ability scores, class, race and racial traits, and skill proficiencies*. \n");
+  time.sleep(2);
+  print("Ability scores relate to modifiers, which are applied to attack rolls, damage modifiers, and skill bonuses. These are affected as follows. \n \n  20     +5 \n 18-19   +4 \n 16-17   +3 \n 14-15   +2 \n 12-13   +1 \n 10-11   +0 \n 8-9     -1 \n 6-7    -2 \n 4-5    -3 \n 2-3     -4 \n 0-1    -5 \n \n");
+  time.sleep(2);
+  print("This programme may not have all the latest information available, but covers at minimum the information listed in the Basic Rules of DnD 5e. Full details can be found at https://dnd.wizards.com/articles/features/basicrules. \n You can use this as a basis for creating a character for your game, for making random NPCs, or just for fun!! \n");
+  time.sleep(0.5);
+  print("*This currently does not include proficiencies and traits from character backgrounds.");
+  time.sleep(0.5);
+  print("\n With that said... \n \n");
+  time.sleep(0.5)
+else: 
+  time.sleep(0.5);
+  print("\n");
+
+print("Let's get started! \n"); 
+
+#-----------------------------
+#RACES
+print("DnD contains an array of races that are varied and nuanced. Below are the race options to choose from, each of which have different racial traits.\n");
+while g == 1:
+  
+  print(" Would you like an more detailed description of the races? (y/n)");
+  desc = input();
+  if desc == "y":
+    print("RACE INFO HERE - Dwarf, Elf, Halfling, Human"); #add race information
+    g = 0;
+  elif desc == "n":
+    g = 0;
+  else :
+    print("I don't understand that answer. Please choose either y or n.");
+    g = 1;
+
+print("Which race would you like to choose for your character? Please choose one of the following options; \n \n Hill Dwarf = dwarfhill,\n Mountain Dwarf = dwarfmountain, \n HIgh Elf = elfhigh \n Wood Elf = elfwood, \n Lightfoot Halfling = halflinglight, \n Stout Halfling = halflingstout, \n Human = human");
+print("\n \n What race is your charcter?");
+#character race input
+
+while h == 1:
+
+  race = input();
+
+  if race == "dwarfhill": #Hill Dwarf
+    Con = Con + 2;
+    Wis = Wis +1;
+    Speed = 25;
+    Size = "Medium";
+    Darkvision = "60ft";
+    #racial proficiencies
+    weapons.append('Battleaxe', 'Handaxe', 'Light hammer', 'Warhammer');
+
+    languages.append('Common', 'Dwarvish');
+
+    #racial traits
+    special.append('Your speed is not reduced by wearing heavy armour')
+    special.append('Advantage on saving throws against poison');
+    special.append('Resistence against poison damage');
+    special.append('Whenever you make an Intelligence(History) check related to the origin of stonework, you are considered proficient in the History skill an add double your proficiency bonus to the check, instead of your normal proficiency bonus.');
+    special.append('Dwarven Toughness: - Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.');
+    health = 1;
+
+    h = 0;
+  elif race == "dwarfmountain": #Mountain Dwarf
+    #racial ability scores, size, and speed
+    Con = Con + 2;
+    Str = Str + 2;
+    Speed = 25;
+    Size = "Medium";   
+    Darkvision = "60ft";
+
+    #racial proficiencies
+    weapons.append('Battleaxe');
+    weapons.append('Handaxe');
+    weapons.append('Light hammer');
+    weapons.append('Warhammer');
+
+    armour.append('Light armour');
+    armour.append('Medium armour');
+
+    languages.append('Common');
+    languages.append('Dwarvish');
+
+    #racial traits
+    special.append('Your speed is not reduced by wearing heavy armour')
+    special.append('Advantage on saving throws against poison');
+    special.append('Resistence against poison damage');
+    special.append('Whenever you make an Intelligence(History) check related to the origin of stonework, you are considered proficient in the History skill an add double your proficiency bonus to the check, instead of your normal proficiency bonus.');
+
+    h = 0;
+  elif race == "elfhigh": #High Elf
+    Dex = Dex + 2;
+    Int = Int + 1;
+    Speed = "30ft";
+    Size  = "Medium";
+    Darkvision = "60ft";
+    #racial proficiencies
+    skills.append('Perception');
+
+    weapons.append('Shortsword');
+    weapons.append('Longsword');
+    weapons.append('Shortbow');
+    weapons.append('Longbow');
+
+    languages.append('Common');
+    languages.append('Elvish');
+
+    #racial traits
+    special.append('You have advantage on saving throws against being charmed, and magic cannot put you to sleep');
+    special.append('Trance: - Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep');
+    special.append("Cantrip: - You learn a wizard cantrip. Intelligence is your casting ability.");
+    special.append("Extra Language: - You can speak, read, and write one extra language of your choice.")
+    h = 0;
+  elif race == "elfwood": #Wood Elf
+    Dex = Dex + 2;
+    Wis = Wis + 1;
+    Speed = "35ft";
+    Size  = "Medium";
+    Darkvision = "60ft";
+
+    #racial proficiencies
+    skills.append('Perception');
+
+    weapons.append('Shortsword');
+    weapons.append('Longsword');
+    weapons.append('Shortbow');
+    weapons.append('Longbow');
+
+    languages.append('Common');
+    languages.append('Elvish');
+
+    #racial traits
+    special.append('You have advantage on saving throws against being charmed, and magic cannot put you to sleep');
+    special.append('Trance: - Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep');
+    special.append("Mask of the Wild: - You can attempt to hide, even if only lightly obscured (eg: heavy rain, falling snow, mist etc.)");
+
+
+    h = 0;
+  elif race == "halflinglight": #Lightfoot Halfling
+    Dex = Dex + 2;
+    Cha = Cha + 1
+    Speed = "25ft";
+    Size = "Small";
+    Darkvision = "None";
+
+    #racial proficiencies
+    languages.append("Common");
+    languages.append("Halfling");
+
+    #racial traits
+    special.append("Lucky: - When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die, and must use the new roll");
+    special.append("You have advantage on saving throws against being frightened");
+    special.append("Nimbleness: - You can move through the space of a creature that is of a size larger than yours");
+    special.append("Naturally Stealthy: - You can attempt to hide even when you are obscured only by a creature that is at least one size bigger than you");
+
+    h = 0;
+  elif race == "halflingstout": #Stout Halfling
+    Dex = Dex + 2;
+    Con = Con + 1;
+    Speed = "25ft";
+    Size = "Small";
+    Darkvision = "None";
+
+    #racial proficiencies
+    languages.append("Common");
+    languages.append("Halfling");
+    
+    #racial traits
+    special.append("Lucky: - When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die, and must use the new roll");
+    special.append("You have advantage on saving throws against being frightened");
+    special.append("Nimbleness: - You can move through the space of a creature that is of a size larger than yours");
+    special.append("You have advantage on saving throws against poison, and have resistence to poison damage")
+
+    h = 0;
+  elif race == "human": #Human
+    Str = Str + 1;
+    Dex = Dex + 1;
+    Con = Con + 1;
+    Int = Int + 1;
+    Wis = Wis + 1;
+    Cha = Cha + 1;
+
+    Speed = "30ft";
+    Size = "Medium";
+    Darkvision = "None";
+
+    #racial skills
+    languages.append("Common");
+
+    #racial traits
+    special.append("You can speak, read, and write Common and one other language of your choice.");
+
+    h = 0;
+  else:
+    print("Sorry, that's not an option. Please choose one of the above options.");
+    h = 1;
+
+if race == "dwarfhill":
+  Race = "Hill Dwarf"
+elif race == "dwarfmountain":
+  Race = "Mountain Dwarf"
+elif race == "elfhigh":
+  Race = "High Elf"
+elif race == "elfwood":
+  Race = "Wood Elf"
+elif race == "halflinglight":
+  Race = "Lightfoot Halfling"
+elif race == "halflingstout":
+  Race = "Stout Halfling"
+else:
+  Race = "Human"
+
+print("You have chosen:", Race);
+#-----------------------------
+#CLASSES
+print("\n Ok, now you know what race your character is, they need a class. This is their role as an adventurer, how they react to the world around them. Available classes are: \n",
+"-Cleric",
+"\n -Fighter",
+"\n -Rogue",
+"\n -Wizard \n");
+
+print("Do you want to hear more information about the classes? (y/n)")
+while l == 1:
+  class_desc = input();
+  if class_desc == "y":
+    print("Cleric: A divine caster who can heal friends, and take arms against foes of man and god alike.(Main stat: Wisdom)\n Fighter: Trained for battle, Fighters are specialists in warfare, able to damage even the strongest of enemies.(Main stats: Strength, Constitution)\n Rogue: Shrouded in shadows, rogues have mastered a variety of skills to gain the upper hand in most every situation. (Main stat: Dexterity)\n Wizard: Wielding arcane knowledge, wizards weave magical threads to harness unimaginable power. (Main stat: Intelligence)");
+    l = 0;
+  elif class_desc == "n":
+    l = 0;
+  else:
+    print("Sorry, that's not an option. Please choose one of the above options.");
+    l = 1;
+'\n'
+time.sleep(0.5);
+
+while p == 1:
+  print("Which class do you wish to choose? (cleric/fighter/rogue/wizard)");
+  _class = input();
+  _class = _class.lower();
+  if _class == "cleric":
+    #cleric class
+    health = health + 8;
+    Class = "Cleric";
+    #weapon proficiencies
+    weapons.append('Simple Weapons');
+    #armour proficiencies
+    armour.append('Light Armour');
+    armour.append('Medium Armour');
+    armour.append('Shields');
+    #saving throw proficiencies
+    saving.append('Wisdom');
+    saving.append('Charisma');
+    #skill choices
+    print("\n Choose 2 from the below:");
+    print(CSkills);
+    
+    while q == 1:
+      print("Choice 1:");
+      choice1 = input();
+      choice1 = choice1.lower();
+      if choice1 in CSkills:
+        CSkills.remove(choice1)
+        skill1 = choice1
+        q = 0;
+      else:
+       print("Sorry, that's not an option. Please choose from one of the above list.");
+       q = 1;
+    while r == 1:
+      print("Choice 2:");
+      choice2 = input();
+      choice2 = choice2.lower();
+      if choice2 in CSkills:
+        skill2 = choice2;
+        CSkills = CSkills.remove(skill2);
+        r = 0;
+        break
+      else:
+        print("\n Sorry, that's not an option. Please choose from one of the above list.")
+        r = 1;
+    #add class equipment
+
+    p = 0;
+
+  elif _class == "fighter":
+    #fighter class
+    health = health + 10;
+    Class = "Fighter";
+    #weapon proficiencies
+    weapons.append('Simple Weapons');
+    weapons.append('Martial Weapons');
+    #armour proficiencies
+    armour.append('Light Armour');
+    armour.append('Medium Armour');
+    armour.append('Heavy Armour'); 
+    armour.append('Shields');
+    #saving throw proficiencies
+    saving.append('Strength');
+    saving.append('Constitution');
+    #skill choices
+    print("\n Choose 2 from the below:");
+    print(FSkills);
+    
+    while s == 1:
+      print("Choice 1:");
+      choice1 = input();
+      choice1 = choice1.lower();
+      if choice1 in FSkills:
+        FSkills.remove(choice1)
+        skill1 = choice1
+        s = 0;
+      else:
+       print("\n Sorry, that's not an option. Please choose from one of the above list.");
+       s = 1;
+    while t == 1:
+      print("Choice 2:");
+      choice2 = input();
+      choice2 = choice2.lower();
+      if choice2 in FSkills:
+        skill2 = choice2;
+        FSkills = FSkills.remove(skill2);
+        t = 0;
+        break
+      else:
+        print("\n Sorry, that's not an option. Please choose from one of the above list.")
+        t = 1;
+
+    #add fighting style choice options
+    #add class equipment
+    
+    p = 0;
+
+  elif _class == "rogue":
+    #rogue class
+    health = health + 8;
+    Class = "Rogue";
+     #weapon proficiencies
+    weapons.append('Simple Weapons');
+    weapons.append('Hand Crossbows');
+    weapons.append('Longswords');
+    weapons.append('Rapiers'); weapons.append('Shortswords');
+    #armour proficiencies
+    armour.append('Light Armour');
+    #tool proficiencies
+    tools.append('Thieves tools');
+    #saving throw proficiencies
+    saving.append('Dexterity');
+    saving.append('Intelligence');
+    #skill choices  
+    print("\n Choose 4 from the below:");
+    print(RSkills);
+    while u == 1:
+      print("Choice 1:");
+      choice1 = input();
+      choice1 = choice1.lower();
+      if choice1 in RSkills:
+        RSkills.remove(choice1)
+        skill1 = choice1
+        u = 0;
+      else:
+       print("\n Sorry, that's not an option. Please choose from one of the above list.");
+       u = 1;
+    while v == 1:
+      print("Choice 2:");
+      choice2 = input();
+      choice2 = choice2.lower();
+      if choice2 in RSkills:
+        skill2 = choice2;
+        RSkills = RSkills.remove(skill2);
+        v = 0;
+        break
+      else:
+        print("\n Sorry, that's not an option. Please choose from one of the above list.")
+        v = 1;
+
+    while w == 1:
+     print("Choice 3:");
+     choice3 = input();
+     choice3 = choice3.lower();
+     if choice3 in RSkills:
+        RSkills.remove(choice3);
+        skill3 = choice3; 
+        w = 0;
+    #fix traceback error line 460 'NoneType'
+     else:
+       print("\n Sorry, that's not an option. Please choose from one of the above list.");
+       w = 1;
+    while y == 1:
+      print("Choice 4:");
+      choice4 = input();
+      choice4 = choice4.lower();
+      if choice4 in RSkills:
+        skill4 = choice4;
+        RSkills = RSkills.remove(skill4);
+        y = 0;
+        break
+      else:
+        print("\n Sorry, that's not an option. Please choose from one of the above list.")
+        y = 1;
+    p = 0;
+
+  elif _class == "wizard":
+    #wizard class
+    health = health + 6;
+    Class = "Wizard";
+    #weapon proficiencies
+    weapons.append('Daggers');
+    weapons.append('Darts');
+    weapons.append('Slings');
+    weapons.append('Quarterstaffs');
+    weapons.append('Light Crossbows');
+    #saving throw proficiencies
+    saving.append('Intelligence');
+    saving.append('Wisdom');
+    #skill choices
+    print("\n Choose 2 from the below:");
+    print(WSkills);
+    
+    while z == 1:
+      print("Choice 1:");
+      choice1 = input();
+      choice1 = choice1.lower();
+      if choice1 in WSkills:
+        WSkills.remove(choice1)
+        skill1 = choice1
+        z = 0;
+      else:
+       print("\n Sorry, that's not an option. Please choose from one of the above list.");
+       z = 1;
+    while a == 1:
+      print("Choice 2:");
+      choice2 = input();
+      choice2 = choice2.lower();
+      if choice2 in WSkills:
+        skill2 = choice2;
+        WSkills = WSkills.remove(skill2);
+        a = 0;
+        break
+      else:
+        print("\n Sorry, that's not an option. Please choose from one of the above list.")
+        a = 1;
+
+    p = 0;
+  else: 
+    print("Sorry, that's not an option. Please choose one of the above options.");
+    p = 1;
+    
+  print("You have chosen:", Class);
+
+skills.append(skill1);
+skills.append(skill2);
+skills.append(skill3);
+skills.append(skill4);
+#-----------------------------
+#ABILITY SCORES
+while j == 1:
+  print("\n Next up, ability scores! Do you want to use standard array, or rolled scores?(standard/rolled)");
+  type = input();
+  if type == "standard":
+    print("Your character's stats will be picked from the standard array ( [15, 14, 13, 12, 10, 8]");
+    stats = [15, 14, 13, 12, 10, 8]
+    j = 0;
+  elif type == "rolled":
+    print("Your stats will be rolled from random, these can range in value from 3 to 18. Please wait while the dice roller rolls your dice. \n");
+
+    time.sleep(2)
+
+    #creates arrays of stats, rerolls if total of sums is 70 or less
+    while k == 1:
+      a = random.sample(Dice, 4)
+      a.remove(min(a))
+      sum_a = sum(a)
+      b = random.sample(Dice, 4)
+      b.remove(min(b))
+      sum_b = sum(b)
+      c = random.sample(Dice, 4)
+      c.remove(min(c))
+      sum_c = sum(c)
+      d = random.sample(Dice, 4)
+      d.remove(min(d))
+      sum_d = sum(d)
+      e = random.sample(Dice, 4)
+      e.remove(min(e))
+      sum_e = sum(e)
+      f = random.sample(Dice, 4)
+      f.remove(min(f))
+      sum_f = sum(f)
+      x = sum(a) + sum(b) + sum(c) + sum(d) + sum(e) + sum(f)
+      if x >= 71:
+        k = 0
+      else:
+        k = 1;
+      
+    print("All rolled, let's see what we're working with!");   
+
+    #stats arrays, printed for user
+    array_stats = [sum_a, sum_b, sum_c, sum_d, sum_e, sum_f]
+
+    print(a, "= ", sum_a);
+    print(b, "= ", sum_b);
+    print(c, "= ", sum_c);
+    print(d, "= ", sum_d);
+    print(e, "= ", sum_e);
+    print(f, "= ", sum_f);
+    print ("\n Your rolled stats are", array_stats);
+    stats = array_stats;
+
+    j = 0;
+  else:
+   print("Sorry, I didn't understand that, please choose either 'standard' or 'rolled' stats'");
+   j = 1;
+
+# assigning stats to character
+print("Now you have a race, a class, and stats, it's time to assign stats to your character, and give them a name!\n Below are you stats listed, with your racial bonuses added.\n");
+print("Strength:", Str);
+print("Dexterity: ", Dex);
+print("Constitution: ", Con);
+print("Intelligence: ", Int);
+print("Wisdom: ", Wis);
+print("Charisma: ", Cha);
+
+stats.sort(reverse=True);
+
+print("Your current stats are", stats);
+
+#sort stats largest to smallest
+
+
+#assign stats to names
+stats_1 = stats[5];
+stats_2 = stats[4];
+stats_3 = stats[3];
+stats_4 = stats[2];
+stats_5 = stats[1];
+stats_6 = stats[0];
+
+#assigning stats_x to ability scores - needs finishing and refining.
+
+#sort stats in descending order
+stats = stats.sort(reverse=True);
+
+#Assign 1st stat
+while b == 1:
+  print("Where would you like to assign", stats_1, "?");
+  place = input();
+  place = place.lower(); 
+  if place == "strength":
+    Str = Str + stats_1;
+    b = 0;
+  elif place == "dexterity":
+    Dex = Dex + stats_1;
+    b = 0;
+  elif place == "constitution":
+    Con = Con + stats_1;
+    b = 0;
+  elif place == "intelligence":
+    Int = Int + stats_1;
+    b = 0;  
+  elif place == "wisdom":
+    Wis = Wis + stats_1;
+    b = 0;
+  elif place == "charisma":
+    Cha = Cha + stats_1;
+    b = 0;
+  else:
+    print("Sorry, that's not an acceptable answer. Please choose from one of the 6 abilities to assign scores.");
+    b = 1;
+
+#Assign 2nd stat
+while c == 1:
+  print("Where would you like to assign", stats_2, "?");
+  place = input();
+  place = place.lower(); 
+  if place == "strength":
+    Str = Str + stats_2;
+    c = 0;
+  elif place == "dexterity":
+    Dex = Dex + stats_2;
+    c = 0;
+  elif place == "constitution":
+    Con = Con + stats_2;
+    c = 0;
+  elif place == "intelligence":
+    Int = Int + stats_2;
+    c = 0;  
+  elif place == "wisdom":
+    Wis = Wis + stats_2;
+    c = 0;
+  elif place == "charisma":
+    Cha = Cha + stats_2;
+    c = 0;
+  else:
+    print("Sorry, that's not an acceptable answer. Please choose from one of the 6 abilities to assign scores.");
+    c = 1;
+
+#Assign 3rd stat
+while d == 1:
+  print("Where would you like to assign", stats_3, "?");
+  place = input();
+  place = place.lower(); 
+  if place == "strength":
+    Str = Str + stats_3;
+    d = 0;
+  elif place == "dexterity":
+    Dex = Dex + stats_3;
+    d = 0;
+  elif place == "constitution":
+    Con = Con + stats_3;
+    d = 0;
+  elif place == "intelligence":
+    Int = Int + stats_3;
+    d = 0;  
+  elif place == "wisdom":
+    Wis = Wis + stats_3;
+    d = 0;
+  elif place == "charisma":
+    Cha = Cha + stats_3;
+    d = 0;
+  else:
+    print("Sorry, that's not an acceptable answer. Please choose from one of the 6 abilities to assign scores.");
+    d = 1;
+
+#Assign 4th stat
+while e == 1:
+  print("Where would you like to assign", stats_4, "?");
+  place = input();
+  place = place.lower(); 
+  if place == "strength":
+    Str = Str + stats_4;
+    e = 0;
+  elif place == "dexterity":
+    Dex = Dex + stats_4;
+    e = 0;
+  elif place == "constitution":
+    Con = Con + stats_4;
+    e = 0;
+  elif place == "intelligence":
+    Int = Int + stats_4;
+    e = 0;  
+  elif place == "wisdom":
+    Wis = Wis + stats_4;
+    e = 0;
+  elif place == "charisma":
+    Cha = Cha + stats_4;
+    e = 0;
+  else:
+    print("Sorry, that's not an acceptable answer. Please choose from one of the 6 abilities to assign scores.");
+    e = 1;
+
+#Assign 5th stat
+while f == 1:
+  print("Where would you like to assign", stats_5, "?");
+  place = input();
+  place = place.lower(); 
+  if place == "strength":
+    Str = Str + stats_5;
+    f = 0;
+  elif place == "dexterity":
+    Dex = Dex + stats_5;
+    f = 0;
+  elif place == "constitution":
+    Con = Con + stats_5;
+    f = 0;
+  elif place == "intelligence":
+    Int = Int + stats_5;
+    f = 0;  
+  elif place == "wisdom":
+    Wis = Wis + stats_5;
+    f = 0;
+  elif place == "charisma":
+    Cha = Cha + stats_5;
+    f = 0;
+  else:
+    print("Sorry, that's not an acceptable answer. Please choose from one of the 6 abilities to assign scores.");
+    f = 1;
+
+#Assign 6th stat
+print("Where would you like to assign the last ability score", stats_6, "?");
+place = input();
+place = place.lower(); 
+if place == "strength":
+ Str = Str + stats_6;
+elif place == "dexterity":
+  Dex = Dex + stats_6;
+elif place == "constitution":
+ Con = Con + stats_6;
+elif place == "intelligence":
+ Int = Int + stats_6;
+elif place == "wisdom":
+ Wis = Wis + stats_6;
+elif place == "charisma":
+  Cha = Cha + stats_6;
+else:
+  print("Sorry, that's not an acceptable answer. Please choose from one of the 6 abilities to assign scores.");
+
+#Ability modifiers
+Str_mod = math.floor((Str -10)/2)
+Dex_mod = math.floor((Dex -10)/2)
+Con_mod = math.floor((Con -10)/2)
+Int_mod = math.floor((Int -10)/2)
+Wis_mod = math.floor((Wis -10)/2)
+Cha_mod = math.floor((Cha -10)/2)
+    
+#HP with CON adjustment
+health = health + Con_mod;
+
+#User-defined character name
+print("Every character needs a name. What name do you wish to give your adventurer?");
+Name = input();
+time.sleep(1);
+
+print("A good name! I think we're about done, so without further ado, let us properly introduce our latest adventurer, ", Name,"! \n \n");
+
+#-------------------------
+#Final display
+print("----------------------- \n \n")
+print("Name: ", Name);
+print("Race: ", Race);
+print("Class: ", Class, "(1)");
+
+print("Size: ", Size);
+print("Speed: ", Speed);
+print("Darkvision: ", Darkvision);
+print("HP:", health)
+#ability scores
+print ("\n Ability scores:");
+print ("Str: ", Str, "  ", Str_mod);
+print ("Dex: ", Dex, "  ", Dex_mod);
+print ("Con: ", Con, "  ", Con_mod);
+print ("Int: ", Int, "  ", Int_mod);
+print ("Wis: ", Wis, "  ", Wis_mod);
+print ("Cha: ", Cha, "  ", Cha_mod); 
+#Skill proficiencies
+print("\n Proficencies (Weapons, Armour and Skills):");
+for x in weapons:
+  print ("- ", x)
+for x in armour:
+  print("-", x)
+for x in tools:
+  print("- ", x)
+for x in skills:
+  print("- ", x)
+# Language proficiencies
+print("\n Languages:");
+for x in languages:
+  print("- ", x)
+#Racial & other traits
+print("\n Racial and Class Traits:");
+for x in special:
+  print("- ", x)
+
+print("\n \n Good luck on your adventure! Until next time...")
+
